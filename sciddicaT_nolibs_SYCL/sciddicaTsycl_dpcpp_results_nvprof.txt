@@ -1,0 +1,15 @@
+ Metrics  Compute Update
+ flop_count_dp 20433893 2402816
+ flop_count_sp 1459709 0
+ flop_count_hp 0 0
+ gld_transactions 3015682 2714114
+ gst_transactions 333 75392
+ l2_read_transactions 827283 715227
+ l2_write_transactions 346 75405
+ dram_read_transactions 151335 376798
+ dram_write_transactions 47815 98566
+ sysmem_read_bytes 0 0
+ sysmem_write_bytes 160 160
+ shared_load_transactions 0 0
+ shared_store_transactions 0 0
+time  498.07ms 148.07ms

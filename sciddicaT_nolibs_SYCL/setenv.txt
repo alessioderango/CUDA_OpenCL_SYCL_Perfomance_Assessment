@@ -1,0 +1,4 @@
+export CUDA_ARCH=PASCAL
+export DPCPP_HOME=/opt/dpc++git/
+export PATH=$DPCPP_HOME/bin:/opt/hipSYCL/CUDA/bin/:$PATH
+export LD_LIBRARY_PATH=$DPCPP_HOME/lib:$LD_LIBRARY_PATH
