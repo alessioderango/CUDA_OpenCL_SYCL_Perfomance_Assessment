@@ -1,8 +1,9 @@
 export CPPC=g++
-export CUDACC=/opt/cuda/bin/nvcc
+export CUDA_PATH=/opt/cuda
+export CUDACC=$CUDA_PATH/bin/nvcc
 export CUDA_ARCH=PASCAL
 export DPCPP_HOME=/opt/dpc++/bin/
 export LD_LIBRARY_PATH=/opt/dpc++/lib:$LD_LIBRARY_PATH
-export OPENCL_INC=/opt/cuda/include/
-export OPENCL_LIB=/opt/cuda/lib64/
+export OPENCL_INC=$CUDA_PATH/include/
+export OPENCL_LIB=$CUDA_PATH/lib64/
 export PATH=/opt/dpc++/bin/:$PATH

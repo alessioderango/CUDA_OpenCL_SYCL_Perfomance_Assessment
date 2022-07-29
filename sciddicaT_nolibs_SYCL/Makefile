@@ -1,6 +1,5 @@
 # definisce la macro CPPC
 CPPC_DPCPP=clang++ 
-FLAGS_DPCPP=  -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend --cuda-gpu-arch=sm_61 --cuda-path=/opt/cuda
 
 ifeq ($(CUDA_ARCH),AMPERE)
 	CUDA_COMP_ARCH = sm_80
@@ -28,6 +27,7 @@ endif
  
 CPPC_HIPSYCL=syclcc
 FLAGS_HIPSYCL= -Wno-everything  -O3 --hipsycl-platform=cuda --cuda-path=/opt/cuda -L/opt/cuda/lib64 --hipsycl-gpu-arch=$(CUDA_COMP_ARCH) 
+FLAGS_DPCPP=  -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend --cuda-gpu-arch=$(CUDA_COMP_ARCH) --cuda-path=$(CUDA_PATH)
 
 HDR=../data/tessina_header.txt
 DEM=../data/tessina_dem.txt
