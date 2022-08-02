@@ -16,3 +16,4 @@ sciddicaTserial
 sciddicaTsycl_dpcpp
 sciddicaTsycl_dpcpp_with_halo_cells
 sciddicaTsycl_dpcpp_without_halo_cells
+setenv_vega.txt

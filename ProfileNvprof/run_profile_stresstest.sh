@@ -40,7 +40,6 @@ executableDirSYCL=./sciddicaT_nolibs_SYCL/
 executableStrSYCL=" ./sciddicaTsycl_dpcpp ../data/tessina_headerX16.txt ../data/tessina_demX16.txt ../data/tessina_sourceX16.txt ./tessina_output_OpenCL 100 $4 $4 && cd .."
 executableStrRuntimeSYCL=" ./sciddicaTsycl_dpcpp ../data/tessina_headerX16.txt ../data/tessina_demX16.txt ../data/tessina_sourceX16.txt ./tessina_output_OpenCL 64000 $4 $4 && cd .."
 
-
 declare -a kernelsCUDA=( sciddicaTFlowsComputation sciddicaTWidthUpdate sciddicaTResetFlows )
 declare -a kernelsSYCL=( Compute Update Reset )
 declare -a metrics=( flop_count_dp flop_count_sp flop_count_hp gld_transactions gst_transactions atomic_transactions local_load_transactions local_store_transactions shared_load_transactions shared_store_transactions l2_read_transactions l2_write_transactions dram_read_transactions dram_write_transactions )

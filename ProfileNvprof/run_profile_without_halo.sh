@@ -20,7 +20,7 @@ echo "HOSTNAME $HOSTNAME"
 source ./setenv_$HOSTNAME.txt
 export CUDA_VISIBLE_DEVICES=$2
 
-OutputDir=./LogProfile_standard_gpu_$2_block_size_$4_hostname_${HOSTNAME}_`date +"%Y-%m-%d_%T"`
+OutputDir=./LogProfile_without_halo_gpu_$2_block_size_$4_hostname_${HOSTNAME}_`date +"%Y-%m-%d_%T"`
 mkdir -p ${OutputDir}
 OutputDirResults=$OutputDir/Results
 mkdir -p ${OutputDirResults}
@@ -30,15 +30,15 @@ delimiter=";"
 logfileprofilmetricsCUDA=./${OutputDir}/log_sciddicaTcuda_naive_oi.csv
 logfileprofilruntimeCUDA=./${OutputDir}/log_sciddicaTcuda_naive_flop.csv
 executableDirCUDA=./sciddicaT_nolibs_CUDA/
-executableStrCUDA=" ./sciddicaTcudaStraightforward ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_cuda 100 $4 $4 && cd .."
-executableStrRuntimeCUDA=" ./sciddicaTcudaStraightforward ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_cuda 4000 $4 $4 && cd .."
+executableStrCUDA=" ./sciddicaTcudaWithoutHaloCells ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_cuda 100 $4 $4 && cd .."
+executableStrRuntimeCUDA=" ./sciddicaTcudaWithoutHaloCells ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_cuda 4000 $4 $4 && cd .."
 
 
 logfileprofilmetricsSYCL=./${OutputDir}/log_sciddicaTsycl_naive_oi.csv
 logfileprofilruntimeSYCL=./${OutputDir}/log_sciddicaTsycl_naive_flop.csv
 executableDirSYCL=./sciddicaT_nolibs_SYCL/
-executableStrSYCL=" ./sciddicaTsycl_dpcpp ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_OpenCL 100 $4 $4 && cd .."
-executableStrRuntimeSYCL=" ./sciddicaTsycl_dpcpp ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_OpenCL 4000 $4 $4 && cd .."
+executableStrSYCL=" ./sciddicaTsycl_dpcpp_without_halo_cells ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_OpenCL 100 $4 $4 && cd .."
+executableStrRuntimeSYCL=" ./sciddicaTsycl_dpcpp_without_halo_cells ../data/tessina_header.txt ../data/tessina_dem.txt ../data/tessina_source.txt ./tessina_output_OpenCL 4000 $4 $4 && cd .."
 
 
 declare -a kernelsCUDA=( sciddicaTFlowsComputation sciddicaTWidthUpdate sciddicaTResetFlows )
@@ -90,7 +90,6 @@ echo " "
 
 echo "Done"
 echo "Results saved in ${OutputDir}/Results"
-#echo "Results SYCL saved in ${logfileprofilruntimeSYCL}"
 
 ###############  CUDA NVPROF ##################
 for i in "${kernelsCUDA[@]}"
@@ -104,9 +103,6 @@ do
     do
         echo "${t} \n">> "${tmpFileName}"
     done 
-
-    #metricsUnique=($(printf "%s\n" "${metrics[@]}" | sort -u | tr '\n' ' '))
-     
     for m in "${metrics[@]}"
     do
         outputMetric=$(grep -hnr "${m}" ${tmpFileName})
